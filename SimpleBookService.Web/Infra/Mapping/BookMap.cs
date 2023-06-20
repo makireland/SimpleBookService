@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SimpleBookService.Web.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SimpleBookService.Web.Models.Entities;
 
 namespace SimpleBookService.Web.Infra.Mapping
 {
-    public class BookMap
+    public class BookMap : IEntityTypeConfiguration<Book>
     {
-        protected void Configure(EntityTypeBuilder<Book> entity)
+        void IEntityTypeConfiguration<Book>.Configure(EntityTypeBuilder<Book> entity)
         {
             entity.HasKey(x => x.Id);
             entity.Property(x => x.Id);
@@ -23,6 +24,9 @@ namespace SimpleBookService.Web.Infra.Mapping
             entity.Property(x => x.Description)
                 .HasMaxLength(500)
                 .IsRequired();
+
+            entity.HasMany(Book => Book.Categories)
+                .WithMany();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using SimpleBookService.Web.Entities;
+﻿using SimpleBookService.Web.Models.Entities;
 
 namespace SimpleBookService.Web.Infra.Interfaces
 {

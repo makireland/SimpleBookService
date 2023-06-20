@@ -1,4 +1,4 @@
-﻿namespace SimpleBookService.Web.Entities
+﻿namespace SimpleBookService.Web.Models.Entities
 {
     public class Book
     {

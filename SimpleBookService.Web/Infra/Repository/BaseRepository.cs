@@ -19,11 +19,6 @@ namespace SimpleBookService.Web.Infra.Repository
            _dbSet.Add(entity);
         }
 
-        public void Delete(T entity)
-        {
-            _dbSet.Remove(entity);
-        }
-
         public async Task<List<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
