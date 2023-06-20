@@ -1,6 +1,6 @@
-﻿using SimpleBookService.Web.Entities;
-using SimpleBookService.Web.Infra.Context;
+﻿using SimpleBookService.Web.Infra.Context;
 using SimpleBookService.Web.Infra.Interfaces;
+using SimpleBookService.Web.Models.Entities;
 
 namespace SimpleBookService.Web.Infra.Repository
 {

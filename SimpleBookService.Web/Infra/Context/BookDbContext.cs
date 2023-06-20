@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SimpleBookService.Web.Entities;
+using SimpleBookService.Web.Models.Entities;
 
 namespace SimpleBookService.Web.Infra.Context
 {
@@ -15,13 +15,12 @@ namespace SimpleBookService.Web.Infra.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             foreach(var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookDbContext).Assembly);
         }
     }
