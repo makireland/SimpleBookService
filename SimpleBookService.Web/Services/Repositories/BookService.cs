@@ -8,7 +8,6 @@ namespace SimpleBookService.Web.Services.Repositories
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-        private readonly ICategoryRepository _categoryRepository;
 
         public BookService(IBookRepository bookRepository)
         {
@@ -21,9 +20,9 @@ namespace SimpleBookService.Web.Services.Repositories
             var bookEntity = ConvertToBookEntity(bookDto);
             var categoryEntity = ConvertToCategoryEntity(categoryDto);
 
-            _categoryRepository.cate .Add(categoryEntity); // Associa a categoria ao livro
+            bookEntity.Categories.Add(categoryEntity); 
 
-            await _bookRepository.Add(bookEntity); // Adiciona o livro ao repositório
+            await _bookRepository.Add(bookEntity);
 
             return await _bookRepository.SaveChangesAsync() > 0;
         }
