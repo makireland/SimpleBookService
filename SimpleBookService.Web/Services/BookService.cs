@@ -3,7 +3,7 @@ using SimpleBookService.Web.Models.Dtos;
 using SimpleBookService.Web.Models.Entities;
 using SimpleBookService.Web.Services.Interfaces;
 
-namespace SimpleBookService.Web.Services.Repositories
+namespace SimpleBookService.Web.Services
 {
     public class BookService : IBookService
     {
@@ -18,7 +18,6 @@ namespace SimpleBookService.Web.Services.Repositories
         {
             var bookEntity = ConvertToBookEntity(bookDto);
 
-
             await _bookRepository.Add(bookEntity);
 
             await _bookRepository.SaveChangesAsync();
@@ -29,14 +28,15 @@ namespace SimpleBookService.Web.Services.Repositories
         public async Task<IEnumerable<BookDto>> GetAll()
         {
             var request = await _bookRepository.GetAll();
-           return ConvertEntityListToDtoList(request);
+            return ConvertEntityListToDtoList(request);
         }
 
         private IEnumerable<BookDto> ConvertEntityListToDtoList(IEnumerable<Book> request)
         {
             var listDto = new List<BookDto>();
 
-            foreach (var book in request) {
+            foreach (var book in request)
+            {
                 listDto.Add(ConvertToBookDto(book));
             }
 
@@ -60,10 +60,15 @@ namespace SimpleBookService.Web.Services.Repositories
             return bookDto;
         }
 
-
-        public Task<bool> Update(BookDto entity)
+        public async Task<BookDto> Update(BookDto bookDto)
         {
-            throw new NotImplementedException();
+            var bookEntity = ConvertToBookEntity(bookDto);
+
+            _bookRepository.Update(bookEntity);
+
+            await _bookRepository.SaveChangesAsync();
+
+            return bookDto;
         }
 
         public Book ConvertToBookEntity(BookDto bookDto)
@@ -77,15 +82,6 @@ namespace SimpleBookService.Web.Services.Repositories
                 Registration = bookDto.Registration,
             };
 
-            if (bookDto.CategoryDto != null)
-            {
-                bookEntity.Category = new Category
-                {
-                    Id = bookDto.Id,
-                    Name = bookDto.Name,
-                };
-            }
-
             return bookEntity;
         }
 
@@ -98,16 +94,8 @@ namespace SimpleBookService.Web.Services.Repositories
                 Author = book.Author,
                 Description = book.Description,
                 Registration = book.Registration,
+                CategoryName = book.Category.Name
             };
-
-            if (book.Category != null)
-            {
-                bookDto.CategoryDto = new CategoryDto
-                {
-                    Id = book.Id,
-                    Name = book.Name,
-                };
-            }
 
             return bookDto;
         }
