@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <a href="home/create">Create new Author</a>
+    <table id="book-table" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Author</th>
+                <th scope="col">Description</th>
+                <th scope="col">Registration date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            $.ajax({
+                'url': "https://localhost:7139/api/book",
+                'method': "GET",
+                'contentType': 'application/json'
+            }).done(function (data)
+            {
+                table = $('#book-table').dataTable({
+                    "aaData": data,
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "name" },
+                        { "data": "categoryName" },
+                        { "data": "author" },
+                        { "data": "description" },
+                        { "data": "registration" },
+                        { 'data': null, title: 'Action', wrap: true, "render": function (item) { return '<div class="btn-group"> <a href="home/update/' + item.id + '" value="0" class="btn btn-warning" data-toggle="modal" data-target="#myModal">View</button></div>' } },
+                    ]
+                })
+            })
+        });
+
+        
+
+    </script>
+
+}
