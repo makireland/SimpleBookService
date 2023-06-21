@@ -14,9 +14,6 @@ namespace SimpleBookService.Web.Infra.Mapping
             entity.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(20);
-
-            entity.HasMany(Category => Category.Books)
-                .WithMany();
         }
     }
 }

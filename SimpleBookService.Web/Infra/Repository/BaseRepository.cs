@@ -19,7 +19,7 @@ namespace SimpleBookService.Web.Infra.Repository
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public virtual async Task<IEnumerable<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
         }

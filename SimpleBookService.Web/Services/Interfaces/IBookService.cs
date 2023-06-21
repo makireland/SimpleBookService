@@ -6,7 +6,7 @@ namespace SimpleBookService.Web.Services.Interfaces
     {
         Task<IEnumerable<BookDto>> GetAll();
         Task<BookDto> GetById(int id);
-        Task<bool> Add(BookDto bookDto, CategoryDto categoryDto);
+        Task<int> Add(BookDto bookDto);
         Task<bool> Update(BookDto entity);
 
     }

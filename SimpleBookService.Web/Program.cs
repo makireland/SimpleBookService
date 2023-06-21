@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SimpleBookService.Web.Infra.Context;
+using SimpleBookService.Web.Infra.Interfaces;
+using SimpleBookService.Web.Infra.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<BookDbContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("BooksDb")));
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
