@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBookService.Web", "SimpleBookService.Web\SimpleBookService.Web.csproj", "{4976C1CE-DA5C-4674-8FC2-56AC3DB65C07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleBook.Web", "SimpleBook.Web\SimpleBook.Web.csproj", "{627326FE-5AA1-434B-BAB5-3E756747F461}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleBookService.Api", "SimpleBookService.Api\SimpleBookService.Api.csproj", "{8E9F147D-D5F4-4E1E-8817-9EA02D0E37BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4976C1CE-DA5C-4674-8FC2-56AC3DB65C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4976C1CE-DA5C-4674-8FC2-56AC3DB65C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4976C1CE-DA5C-4674-8FC2-56AC3DB65C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4976C1CE-DA5C-4674-8FC2-56AC3DB65C07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{627326FE-5AA1-434B-BAB5-3E756747F461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{627326FE-5AA1-434B-BAB5-3E756747F461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{627326FE-5AA1-434B-BAB5-3E756747F461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{627326FE-5AA1-434B-BAB5-3E756747F461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E9F147D-D5F4-4E1E-8817-9EA02D0E37BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E9F147D-D5F4-4E1E-8817-9EA02D0E37BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E9F147D-D5F4-4E1E-8817-9EA02D0E37BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E9F147D-D5F4-4E1E-8817-9EA02D0E37BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

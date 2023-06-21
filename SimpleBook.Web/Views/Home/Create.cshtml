@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form id="myForm">
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select class="form-control" id="category" name="category">
+            <option value="">Select a category</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" required maxlength="50">
+    </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <input type="text" class="form-control" id="author" name="author" required maxlength="50">
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" name="description" required maxlength="500"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+@section scripts {
+
+    <script>
+        // Function to populate the category dropdown using AJAX
+        function populateCategoryDropdown()
+        {
+            $.ajax({
+                url: 'https://localhost:7139/api/category', // Replace with your API endpoint URL to fetch categories
+                type: 'GET',
+                success: function (data)
+                {
+                    var options = '';
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $('#category').append(options);
+                },
+                error: function ()
+                {
+                    // Handle error
+                }
+            });
+        }
+
+        // Call the populateCategoryDropdown function on page load
+        $(document).ready(function ()
+        {
+            populateCategoryDropdown();
+        });
+
+        // Handle form submission
+        $('#myForm').submit(function (e)
+        {
+            e.preventDefault();
+
+            var data = {
+                CategoryId: $('#category').val(),
+                Name: $('#name').val(),
+                Author: $('#author').val(),
+                Description: $('#description').val()
+            };
+
+            var jsonData = JSON.stringify(data);
+
+            $.ajax({
+                url: 'https://localhost:7139/api/book/create', // Replace with your API endpoint URL to submit form data
+                type: 'POST',
+                data: jsonData,
+                contentType: 'application/json',
+                success: function (response)
+                {
+                    window.location.href = '/';
+                },
+                error: function (error)
+                {debugger;
+                    alert("Something wrong happened")
+                }
+            });
+        });
+    </script>
+}
