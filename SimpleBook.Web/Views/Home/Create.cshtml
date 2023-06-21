@@ -1,28 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Book registration";
 }
 
+<h1 class="text-center">@ViewData["Title"]</h1>
 
 <form id="myForm">
-    <div class="form-group">
+    <div class="form-group py-2">
         <label for="category">Category:</label>
         <select class="form-control" id="category" name="category">
             <option value="">Select a category</option>
         </select>
     </div>
-    <div class="form-group">
+    <div class="form-group py-3">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="name" required maxlength="50">
     </div>
-    <div class="form-group">
+    <div class="form-group ">
         <label for="author">Author:</label>
         <input type="text" class="form-control" id="author" name="author" required maxlength="50">
     </div>
-    <div class="form-group">
+    <div class="form-group py-3">
         <label for="description">Description:</label>
         <textarea class="form-control" id="description" name="description" required maxlength="500"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle px-2"></i>Submit</button>
 </form>
 
 
@@ -37,7 +38,7 @@
                 type: 'GET',
                 success: function (data)
                 {
-                    var options = '';
+                    let options = '';
                     for (var i = 0; i < data.length; i++)
                     {
                         options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
@@ -62,17 +63,17 @@
         {
             e.preventDefault();
 
-            var data = {
+            let data = {
                 CategoryId: $('#category').val(),
                 Name: $('#name').val(),
                 Author: $('#author').val(),
                 Description: $('#description').val()
             };
 
-            var jsonData = JSON.stringify(data);
+            let jsonData = JSON.stringify(data);
 
             $.ajax({
-                url: 'https://localhost:7139/api/book/create', // Replace with your API endpoint URL to submit form data
+                url: 'https://localhost:7139/api/book/create',
                 type: 'POST',
                 data: jsonData,
                 contentType: 'application/json',

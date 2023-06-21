@@ -1,9 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "List of Books";
 }
 
-<div class="text-center">
-    <a href="home/create">Create new Author</a>
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="text-right">
+    <div class="row col-md-2 py-3">
+        <a class="btn btn-success text-right" href="home/create"><i class="bi bi-plus-square px-1"></i> New Book Reg</a>
+    </div>
     <table id="book-table" class="table table-striped" style="width:100%">
         <thead>
             <tr>
@@ -41,7 +45,7 @@
                         { "data": "author" },
                         { "data": "description" },
                         { "data": "registration" },
-                        { 'data': null, title: 'Action', wrap: true, "render": function (item) { return '<div class="btn-group"> <a href="home/update/' + item.id + '" value="0" class="btn btn-warning" data-toggle="modal" data-target="#myModal">View</button></div>' } },
+                        { 'data': null, title: 'Action', wrap: true, "render": function (item) { return '<div class="btn-group"> <a href="home/update/' + item.id + '" value="0" class="btn btn-warning" data-toggle="modal" data-target="#myModal"><i class="bi bi-pen-fill px-1"></i></button></div>' } },
                     ]
                 })
             })
