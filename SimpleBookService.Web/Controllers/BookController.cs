@@ -26,9 +26,9 @@ namespace SimpleBookService.Web.Controllers
 
         // GET api/<BookController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await _bookService.GetById(id));
         }
 
         // POST api/<BookController>
@@ -52,7 +52,7 @@ namespace SimpleBookService.Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            var book = _bookService.GetById(id);
+            var book = await _bookService.GetById(id);
 
             if (book == null)
             {

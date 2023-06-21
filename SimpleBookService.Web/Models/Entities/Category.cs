@@ -1,8 +1,7 @@
 ﻿namespace SimpleBookService.Web.Models.Entities
 {
-    public class Category
+    public class Category : Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Book> Books { get; set; }
 

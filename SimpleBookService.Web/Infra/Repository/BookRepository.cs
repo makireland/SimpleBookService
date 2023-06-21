@@ -11,9 +11,14 @@ namespace SimpleBookService.Web.Infra.Repository
         {
         }
 
+        public override async Task<Book> GetById(int id)
+        {
+            return await _dbSet.Include(x => x.Category).AsNoTracking().FirstOrDefaultAsync(x=>x.Id == id);
+        }
+
         public override async Task<IEnumerable<Book>> GetAll()
         {
-            return await _dbSet.Include(x => x.Category).ToListAsync();
+            return await _dbSet.Include(x => x.Category).AsNoTracking().ToListAsync();
         }
     }
 }

@@ -45,19 +45,9 @@ namespace SimpleBookService.Web.Services
 
         public async Task<BookDto> GetById(int id)
         {
-            var bookIdRep = await _bookRepository.GetById(id);
+            var book = await _bookRepository.GetById(id);
 
-            var bookDto = new BookDto()
-            {
-                Id = bookIdRep.Id,
-                Name = bookIdRep.Name,
-                Author = bookIdRep.Author,
-                Description = bookIdRep.Description,
-                Registration = bookIdRep.Registration,
-                CategoryId = bookIdRep.CategoryId
-            };
-
-            return bookDto;
+            return ConvertToBookDto(book);
         }
 
         public async Task<BookDto> Update(BookDto bookDto)
@@ -76,6 +66,7 @@ namespace SimpleBookService.Web.Services
             var bookEntity = new Book
             {
                 Id = bookDto.Id,
+                CategoryId = bookDto.CategoryId,
                 Name = bookDto.Name,
                 Author = bookDto.Author,
                 Description = bookDto.Description,
@@ -90,11 +81,12 @@ namespace SimpleBookService.Web.Services
             var bookDto = new BookDto
             {
                 Id = book.Id,
+                CategoryId= book.CategoryId,
                 Name = book.Name,
                 Author = book.Author,
                 Description = book.Description,
                 Registration = book.Registration,
-                CategoryName = book.Category.Name
+                CategoryName = book.Category?.Name
             };
 
             return bookDto;

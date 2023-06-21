@@ -29,31 +29,12 @@ namespace SimpleBookService.Web.Services
         {
             var request = await _categoryRepo.GetAll();
             return ConvertEntityListToDtoList(request);
-        }
-
-        private IEnumerable<CategoryDto> ConvertEntityListToDtoList(IEnumerable<Category> request)
-        {
-            var listDto = new List<CategoryDto>();
-
-            foreach (var category in request)
-            {
-                listDto.Add(ConvertToCategoryDto(category));
-            }
-
-            return listDto;
-        }
+        }       
 
         public async Task<CategoryDto> GetById(int id)
         {
-            var categoryIdRep = await _categoryRepo.GetById(id);
-
-            var categooryDto = new CategoryDto()
-            {
-                Id = categoryIdRep.Id,
-                Name = categoryIdRep.Name
-            };
-
-            return categooryDto;
+            var category = await _categoryRepo.GetById(id);
+            return ConvertToCategoryDto(category);
         }
 
         public async Task<CategoryDto> Update(CategoryDto categoryDto)
@@ -88,6 +69,17 @@ namespace SimpleBookService.Web.Services
             };
 
             return categoryDto;
+        }
+        private IEnumerable<CategoryDto> ConvertEntityListToDtoList(IEnumerable<Category> request)
+        {
+            var listDto = new List<CategoryDto>();
+
+            foreach (var category in request)
+            {
+                listDto.Add(ConvertToCategoryDto(category));
+            }
+
+            return listDto;
         }
     }
 }
