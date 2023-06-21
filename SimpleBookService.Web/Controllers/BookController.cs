@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SimpleBookService.Web.Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +9,17 @@ namespace SimpleBookService.Web.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        // GET: api/<BookController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IBookService _bookService;
+
+        public BookController(IBookService bookService)
         {
-            return new string[] { "value1", "value2" };
+            _bookService = bookService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _bookService.GetAll());
         }
 
         // GET api/<BookController>/5
@@ -41,3 +48,5 @@ namespace SimpleBookService.Web.Controllers
         }
     }
 }
+
+
