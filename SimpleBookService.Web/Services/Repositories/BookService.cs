@@ -43,7 +43,7 @@ namespace SimpleBookService.Web.Services.Repositories
                 Author = bookIdRep.Author,
                 Description = bookIdRep.Description,
                 Registration = bookIdRep.Registration,
-                CategoriesDto = new Category(bookIdRep.Category.Id, bookIdRep.Category.BookId, bookIdRep.Category.Name)
+                CategoryId = bookIdRep.CategoryId
             };
 
             return bookDto;
