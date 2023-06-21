@@ -14,12 +14,12 @@ namespace SimpleBookService.Web.Infra.Repository
             _dbContext = dbContext;
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-           _dbSet.Add(entity);
+            await _dbSet.AddAsync(entity);
         }
 
-        public async Task<List<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
         }
@@ -36,7 +36,7 @@ namespace SimpleBookService.Web.Infra.Repository
 
         public void Update(T entity)
         {
-            _dbContext.Update(entity);
+           _dbContext.Update(entity);
         }
     }
 }
