@@ -14,22 +14,33 @@ namespace SimpleBookService.Web.Services.Repositories
             _bookRepository = bookRepository;
         }
 
-        public async Task<bool> Add(BookDto bookDto, CategoryDto categoryDto)
+        public async Task<int> Add(BookDto bookDto)
         {
-
             var bookEntity = ConvertToBookEntity(bookDto);
-            var categoryEntity = ConvertToCategoryEntity(categoryDto);
 
-            bookEntity.Categories.Add(categoryEntity); 
 
             await _bookRepository.Add(bookEntity);
 
-            return await _bookRepository.SaveChangesAsync() > 0;
+            await _bookRepository.SaveChangesAsync();
+
+            return bookEntity.Id;
         }
 
         public async Task<IEnumerable<BookDto>> GetAll()
         {
-           return (IEnumerable<BookDto>)await _bookRepository.GetAll();
+            var request = await _bookRepository.GetAll();
+           return ConvertEntityListToDtoList(request);
+        }
+
+        private IEnumerable<BookDto> ConvertEntityListToDtoList(IEnumerable<Book> request)
+        {
+            var listDto = new List<BookDto>();
+
+            foreach (var book in request) {
+                listDto.Add(ConvertToBookDto(book));
+            }
+
+            return listDto;
         }
 
         public async Task<BookDto> GetById(int id)
@@ -63,22 +74,42 @@ namespace SimpleBookService.Web.Services.Repositories
                 Name = bookDto.Name,
                 Author = bookDto.Author,
                 Description = bookDto.Description,
-                Registration = bookDto.Registration
+                Registration = bookDto.Registration,
             };
+
+            if (bookDto.CategoryDto != null)
+            {
+                bookEntity.Category = new Category
+                {
+                    Id = bookDto.Id,
+                    Name = bookDto.Name,
+                };
+            }
 
             return bookEntity;
         }
 
-        public Category ConvertToCategoryEntity(CategoryDto categoryDto)
+        public BookDto ConvertToBookDto(Book book)
         {
-            var categoryEntity = new Category
+            var bookDto = new BookDto
             {
-                Id = categoryDto.Id,
-                BookId = categoryDto.BookId,
-                Name = categoryDto.Name
+                Id = book.Id,
+                Name = book.Name,
+                Author = book.Author,
+                Description = book.Description,
+                Registration = book.Registration,
             };
 
-            return categoryEntity;
+            if (book.Category != null)
+            {
+                bookDto.CategoryDto = new CategoryDto
+                {
+                    Id = book.Id,
+                    Name = book.Name,
+                };
+            }
+
+            return bookDto;
         }
     }
 }

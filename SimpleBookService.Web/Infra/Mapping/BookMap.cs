@@ -25,7 +25,6 @@ namespace SimpleBookService.Web.Infra.Mapping
                 .HasMaxLength(500)
                 .IsRequired();
 
-            entity.HasKey(x => x.CategoryId);
         }
     }
 }
