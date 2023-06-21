@@ -12,6 +12,7 @@ namespace SimpleBookService.Web.Infra.Repository
         public BaseRepository(BookDbContext dbContext)
         {
             _dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
         }
 
         public async Task Add(T entity)

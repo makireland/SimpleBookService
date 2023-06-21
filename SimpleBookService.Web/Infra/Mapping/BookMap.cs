@@ -13,15 +13,18 @@ namespace SimpleBookService.Web.Infra.Mapping
 
             entity.Property(x => x.Name)
                 .IsRequired()
+                .IsUnicode(false)
                 .HasMaxLength(50);
 
             entity.Property(x => x.Author)
+                .IsUnicode(false)
                 .HasMaxLength(50)
                 .IsRequired();
 
             entity.Property(x => x.Registration);
 
             entity.Property(x => x.Description)
+                .IsUnicode(false)
                 .HasMaxLength(500)
                 .IsRequired();
 
