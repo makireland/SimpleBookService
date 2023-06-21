@@ -1,19 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Update the Book";
 }
 
+<h1 class="text-center">@ViewData["Title"]</h1>
 
 <form id="myForm">
     <input type="hidden" id="id" />
     <input type="hidden" id="registration" />
 
-    <div class="form-group">
+    <div class="form-group py-2">
         <label for="category">Category:</label>
         <select class="form-control" id="category" name="category">
             <option value="">Select a category</option>
         </select>
     </div>
-    <div class="form-group">
+    <div class="form-group py-3">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="name" required maxlength="50">
     </div>
@@ -21,7 +22,7 @@
         <label for="author">Author:</label>
         <input type="text" class="form-control" id="author" name="author" required maxlength="50">
     </div>
-    <div class="form-group">
+    <div class="form-group py-3">
         <label for="description">Description:</label>
         <textarea class="form-control" id="description" name="description" required maxlength="500"></textarea>
     </div>
@@ -40,7 +41,7 @@
                 type: 'GET',
                 success: function (data)
                 {
-                    var options = '';
+                    let options = '';
                     for (var i = 0; i < data.length; i++)
                     {
                         options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
@@ -58,12 +59,12 @@
 
         function getBook()
         {
-            var path = window.location.pathname;
-            var segments = path.split('/');
-            var parameter = segments[segments.length - 1];
+            let path = window.location.pathname;
+            let segments = path.split('/');
+            let parameter = segments[segments.length - 1];
 
             $.ajax({
-                url: 'https://localhost:7139/api/book/' + parameter, // Replace with your API endpoint URL to fetch categories
+                url: 'https://localhost:7139/api/book/' + parameter,
                 type: 'GET',
                 success: function (data)
                 {
@@ -92,7 +93,7 @@
         {
             e.preventDefault();
 
-            var data = {
+            let data = {
                 Id: $('#id').val(),
                 Registration: $('#registration').val(),
                 CategoryId: $('#category').val(),
@@ -101,10 +102,10 @@
                 Description: $('#description').val()
             };
 
-            var jsonData = JSON.stringify(data);
+            let jsonData = JSON.stringify(data);
 
             $.ajax({
-                url: `https://localhost:7139/api/book/${data.Id}/Update`, // Replace with your API endpoint URL to submit form data
+                url: `https://localhost:7139/api/book/${data.Id}/Update`,
                 type: 'PUT',
                 data: jsonData,
                 contentType: 'application/json',
