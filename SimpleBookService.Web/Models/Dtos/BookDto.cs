@@ -9,11 +9,7 @@
         public string Author { get; set; }
         public DateTime Registration { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<CategoryDto> CategoriesDto { get; set; }
+        public virtual CategoryDto CategoryDto { get; set; }
 
-        public BookDto()
-        {
-            CategoriesDto = new HashSet<CategoryDto>();
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SimpleBookService.Web.Models.Entities
+﻿using SimpleBookService.Web.Models.Dtos;
+
+namespace SimpleBookService.Web.Models.Entities
 {
     public class Book
     {
@@ -8,11 +10,6 @@
         public string Author { get; set; }
         public DateTime Registration { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
-
-        public Book()
-        {
-            Categories = new HashSet<Category>();
-        }
+        public virtual Category Category { get; set; }
     }
 }
